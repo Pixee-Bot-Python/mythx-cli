@@ -5,6 +5,7 @@ from collections import defaultdict
 from typing import List
 
 import click
+from security import safe_command
 
 
 class ScribbleMixin:
@@ -62,8 +63,7 @@ class ScribbleMixin:
                     }
                 }
 
-        process = subprocess.run(
-            [scribble_path, "--input-mode", "json", "--output-mode", "json"]
+        process = safe_command.run(subprocess.run, [scribble_path, "--input-mode", "json", "--output-mode", "json"]
             + ([f"--path-remapping" "{';'.join(remappings)}"] if remappings else [])
             + ["--"],
             input=json.dumps(stdin).encode("utf-8"),
@@ -84,8 +84,7 @@ class ScribbleMixin:
         :param remappings: Optional solc import remappings
         :return: The deserialized scribble JSON output object
         """
-        process = subprocess.run(
-            [scribble_path, "--input-mode=source", "--output-mode=json"]
+        process = safe_command.run(subprocess.run, [scribble_path, "--input-mode=source", "--output-mode=json"]
             + ([f"--path-remapping={';'.join(remappings)}"] if remappings else [])
             + [target],
             stdout=subprocess.PIPE,
