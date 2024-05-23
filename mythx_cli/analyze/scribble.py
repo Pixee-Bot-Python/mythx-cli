@@ -64,7 +64,7 @@ class ScribbleMixin:
 
         process = subprocess.run(
             [scribble_path, "--input-mode", "json", "--output-mode", "json"]
-            + ([f"--path-remapping" "{';'.join(remappings)}"] if remappings else [])
+            + ([f"--path-remapping", "{';'.join(remappings)}"] if remappings else [])
             + ["--"],
             input=json.dumps(stdin).encode("utf-8"),
             stdout=subprocess.PIPE,
