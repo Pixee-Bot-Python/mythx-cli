@@ -89,7 +89,7 @@ def render(
         template_name = default_template.name
 
     if not markdown and aesthetic:
-        LOGGER.debug(f"Overwriting template to go A E S T H E T I C")
+        LOGGER.debug("Overwriting template to go A E S T H E T I C")
         template_name = "aesthetic.html"
 
     LOGGER.debug("Initializing Jinja environment")
@@ -150,7 +150,7 @@ def render(
 
     rendered = template.render(report_context=report_context, target=target)
     if not markdown:
-        LOGGER.debug(f"Minifying HTML report")
+        LOGGER.debug("Minifying HTML report")
         rendered = htmlmin.minify(rendered, remove_comments=True)
 
     write_or_print(rendered, mode="w+")

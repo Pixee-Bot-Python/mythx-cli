@@ -55,10 +55,10 @@ def determine_analysis_targets(
     if not target:
         cwd = Path.cwd()
         if detect_truffle_files(cwd) or forced_scenario == "truffle":
-            LOGGER.debug(f"Identified directory as truffle project")
+            LOGGER.debug("Identified directory as truffle project")
             mode_list.append((ScenarioMode.TRUFFLE, cwd))  # TRUFFLE DIR
         elif list(glob("*.sol")) or forced_scenario == "solidity":
-            LOGGER.debug(f"Identified directory with Solidity files")
+            LOGGER.debug("Identified directory with Solidity files")
             mode_list.append((ScenarioMode.SOLIDITY_DIR, cwd))  # SOLIDITY DIR
         else:
             raise click.exceptions.UsageError(
